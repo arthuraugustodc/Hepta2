@@ -78,7 +78,7 @@ p { margin: 0; }
 }
 .header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
 .brand { display: inline-flex; align-items: center; gap: .9rem; text-decoration: none; min-width: max-content; }
-.brand-official { display: block; mix-blend-mode: screen; object-fit: cover; object-position: 50% 50%; }
+.brand-official { display: block; object-fit: cover; object-position: 50% 46%; }
 .brand-official-horizontal { width: 238px; height: 62px; }
 .brand-mark { width: 48px; height: 48px; }
 .brand-copy { padding-left: .9rem; border-left: 1px solid rgba(255,255,255,.34); }
@@ -129,7 +129,7 @@ p { margin: 0; }
 .hero-signature::before { width: 390px; height: 390px; }
 .hero-signature::after { width: 290px; height: 290px; border-color: rgba(255,255,255,.1); }
 .signature { position: relative; z-index: 2; display: grid; justify-items: center; padding: 0; }
-.official-vertical { width: min(100%, 520px); aspect-ratio: 1; object-fit: contain; mix-blend-mode: screen; }
+.official-vertical { width: min(100%, 520px); aspect-ratio: 1; object-fit: contain; }
 .signature .brand-mark { width: 154px; height: 154px; }
 .signature-name { margin-top: 1rem; font: 700 clamp(2rem, 5vw, 3rem)/1 'Orbitron', sans-serif; letter-spacing: .13em; }
 .signature-name em { color: var(--red); font-style: normal; }
