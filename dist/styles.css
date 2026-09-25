@@ -284,6 +284,41 @@ p { margin: 0; }
 .solution-list strong { color: var(--paper); font-weight: 500; }
 .sector-card .button { align-self: flex-start; min-height: 42px; margin-top: auto; padding: .72rem 1rem; font-size: .72rem; }
 
+@media (min-width: 961px) and (min-height: 700px) {
+  html:has(body.home-page) { scroll-snap-type: y proximity; }
+  body.home-page main > .section:not(.hero) {
+    min-height: calc(100svh - var(--header));
+    display: grid;
+    align-items: center;
+    padding-block: clamp(3rem, 6vh, 5.5rem);
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+  }
+  body.home-page .hero { scroll-snap-align: start; }
+  body.home-page .final-cta {
+    min-height: 58svh;
+    display: grid;
+    align-items: center;
+    scroll-snap-align: start;
+  }
+  body.home-page .site-footer { scroll-snap-align: end; }
+}
+
+@media (min-width: 961px) and (min-height: 700px) and (max-height: 850px) {
+  body.home-page main > .section:not(.hero) { padding-block: 2.75rem; }
+  body.home-page .section-head { margin-bottom: 2rem; }
+  body.home-page .value-card { min-height: 185px; }
+  body.home-page .value-icon { margin: 2rem 0 1rem; }
+  body.home-page .timeline { margin-top: 2.5rem; }
+  body.home-page .timeline article { padding-top: 3.2rem; }
+  body.home-page .preview-card { min-height: 168px; }
+  body.home-page .sector-icon { margin-bottom: 2rem; }
+  body.home-page .proof-intro,
+  body.home-page .proof-stat { min-height: 230px; }
+  body.home-page .difference-grid { margin-top: 2.25rem; }
+  body.home-page .section-action { margin-top: 2.25rem; }
+}
+
 @media (max-width: 960px) {
   .nav { position: fixed; inset: var(--header) 0 auto; display: none; padding: 1.4rem 20px 2rem; flex-direction: column; align-items: stretch; gap: 0; background: #121212; border-bottom: 1px solid var(--line); }
   .nav.open { display: flex; }
