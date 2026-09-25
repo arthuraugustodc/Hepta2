@@ -157,7 +157,14 @@ p { margin: 0; }
 .orbital-system span:first-child { width: 9px; height: 9px; background: var(--red); box-shadow: 0 0 18px rgba(140,26,34,.9); }
 .orbital-system span:nth-child(3), .orbital-system span:nth-child(6) { background: var(--paper); box-shadow: 0 0 12px rgba(255,255,255,.5); }
 .signature { position: relative; z-index: 2; display: grid; justify-items: center; padding: 0; animation: logo-float 6s ease-in-out infinite; }
-.official-vertical { width: min(100%, 520px); aspect-ratio: 1; object-fit: contain; filter: drop-shadow(0 16px 32px rgba(0,0,0,.3)); animation: logo-glow 5s ease-in-out infinite; }
+.official-vertical {
+  width: min(100%, 520px);
+  aspect-ratio: 1;
+  object-fit: contain;
+  transform: translateY(var(--orbit-offset-y));
+  filter: drop-shadow(0 16px 32px rgba(0,0,0,.3));
+  animation: logo-glow 5s ease-in-out infinite;
+}
 .signature .brand-mark { width: 154px; height: 154px; }
 .signature-name { margin-top: 1rem; font: 700 clamp(2rem, 5vw, 3rem)/1 'Orbitron', sans-serif; letter-spacing: .13em; }
 .signature-name em { color: var(--red); font-style: normal; }
