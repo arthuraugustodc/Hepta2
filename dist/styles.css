@@ -132,7 +132,7 @@ p { margin: 0; }
   mask-image: radial-gradient(circle, #000 20%, transparent 68%);
   animation: field-drift 18s linear infinite;
 }
-.hero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); align-items: center; gap: clamp(3rem, 8vw, 7rem); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); align-items: center; gap: clamp(2.75rem, 6vw, 5.25rem); }
 .hero-copy { position: relative; z-index: 1; }
 .hero-copy > * { opacity: 0; transform: translateY(18px); animation: reveal-up .8s cubic-bezier(.22,.8,.28,1) forwards; }
 .hero-copy > :nth-child(1) { animation-delay: .08s; }
@@ -144,34 +144,34 @@ p { margin: 0; }
 .eyebrow::before { content: ''; width: 38px; height: 1px; background: var(--gold); }
 .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; margin-top: 2.2rem; }
 .microcopy { margin-top: 1rem; color: rgba(255,255,255,.5); font-size: .86rem; }
-.hero-signature { --orbit-offset-y: -58px; position: relative; display: grid; place-items: center; min-height: 440px; opacity: 0; transform: scale(.96); animation: hero-arrive 1.1s .28s cubic-bezier(.2,.75,.22,1) forwards; }
+.hero-signature { --orbit-offset-y: -62px; position: relative; display: grid; place-items: center; min-height: 468px; opacity: 0; transform: scale(.96); animation: hero-arrive 1.1s .28s cubic-bezier(.2,.75,.22,1) forwards; }
 .hero-signature::before, .hero-signature::after { content: ''; position: absolute; left: 50%; top: calc(50% + var(--orbit-offset-y)); border-radius: 50%; }
 .hero-signature::before {
-  width: 390px; height: 390px; margin: -195px 0 0 -195px;
+  width: 425px; height: 425px; margin: -212.5px 0 0 -212.5px;
   background: conic-gradient(from 20deg, transparent 0 10%, rgba(187,150,62,.5) 13%, transparent 22%, rgba(255,255,255,.16) 44%, transparent 53%, rgba(187,150,62,.32) 76%, transparent 88%);
   -webkit-mask: radial-gradient(circle, transparent 68.5%, #000 69%, #000 70.2%, transparent 70.7%);
   mask: radial-gradient(circle, transparent 68.5%, #000 69%, #000 70.2%, transparent 70.7%);
   animation: orbit-spin 28s linear infinite;
 }
 .hero-signature::after {
-  width: 290px; height: 290px; margin: -145px 0 0 -145px;
+  width: 316px; height: 316px; margin: -158px 0 0 -158px;
   background: conic-gradient(from 120deg, transparent 0 22%, rgba(255,255,255,.14) 28%, transparent 36%, rgba(187,150,62,.34) 62%, transparent 71%);
   -webkit-mask: radial-gradient(circle, transparent 68.5%, #000 69%, #000 70%, transparent 70.6%);
   mask: radial-gradient(circle, transparent 68.5%, #000 69%, #000 70%, transparent 70.6%);
   animation: orbit-spin-reverse 19s linear infinite;
 }
-.orbital-system { position: absolute; left: 50%; top: calc(50% + var(--orbit-offset-y)); z-index: 1; width: 390px; height: 390px; margin: -195px 0 0 -195px; border-radius: 50%; animation: orbit-spin 22s linear infinite; }
+.orbital-system { position: absolute; left: 50%; top: calc(50% + var(--orbit-offset-y)); z-index: 1; width: 425px; height: 425px; margin: -212.5px 0 0 -212.5px; border-radius: 50%; animation: orbit-spin 22s linear infinite; }
 .orbital-system span {
   --angle: calc(var(--i) * 51.43deg);
   position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; border-radius: 50%;
   background: var(--gold); box-shadow: 0 0 12px rgba(187,150,62,.75);
-  transform: rotate(var(--angle)) translateX(195px) translate(-50%, -50%);
+  transform: rotate(var(--angle)) translateX(212.5px) translate(-50%, -50%);
 }
 .orbital-system span:first-child { width: 9px; height: 9px; background: var(--red); box-shadow: 0 0 18px rgba(140,26,34,.9); }
 .orbital-system span:nth-child(3), .orbital-system span:nth-child(6) { background: var(--paper); box-shadow: 0 0 12px rgba(255,255,255,.5); }
 .signature { position: relative; z-index: 2; display: grid; justify-items: center; padding: 0; animation: logo-float 6s ease-in-out infinite; }
 .official-vertical {
-  width: min(100%, 520px);
+  width: min(100%, 560px);
   aspect-ratio: 1;
   object-fit: contain;
   transform: translateY(var(--orbit-offset-y));
@@ -346,12 +346,12 @@ p { margin: 0; }
   body.home-page .eyebrow { margin-bottom: 1rem; }
   body.home-page .hero-actions { margin-top: 1.4rem; }
   body.home-page .microcopy { margin-top: .65rem; }
-  body.home-page .hero-signature { --orbit-offset-y: -44px; min-height: 320px; }
-  body.home-page .official-vertical { width: min(100%, 390px); }
-  body.home-page .hero-signature::before { width: 310px; height: 310px; margin: -155px 0 0 -155px; }
-  body.home-page .hero-signature::after { width: 230px; height: 230px; margin: -115px 0 0 -115px; }
-  body.home-page .orbital-system { width: 310px; height: 310px; margin: -155px 0 0 -155px; }
-  body.home-page .orbital-system span { transform: rotate(var(--angle)) translateX(155px) translate(-50%, -50%); }
+  body.home-page .hero-signature { --orbit-offset-y: -47px; min-height: 338px; }
+  body.home-page .official-vertical { width: min(100%, 420px); }
+  body.home-page .hero-signature::before { width: 334px; height: 334px; margin: -167px 0 0 -167px; }
+  body.home-page .hero-signature::after { width: 248px; height: 248px; margin: -124px 0 0 -124px; }
+  body.home-page .orbital-system { width: 334px; height: 334px; margin: -167px 0 0 -167px; }
+  body.home-page .orbital-system span { transform: rotate(var(--angle)) translateX(167px) translate(-50%, -50%); }
   body.home-page .section-head { margin-bottom: 1.65rem; }
   body.home-page .value-card { min-height: 155px; padding: 1.25rem; }
   body.home-page .value-icon { margin: 1.35rem 0 .75rem; }
