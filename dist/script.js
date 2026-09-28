@@ -34,10 +34,12 @@ if (valueCarousel) {
   const dotsContainer = section.querySelector('[data-carousel-dots]');
   const status = section.querySelector('[data-carousel-status]');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const scrollModeQuery = window.matchMedia('(min-width: 769px) and (min-height: 650px)');
   let currentIndex = 0;
   let maximumIndex = cards.length - 1;
   let autoplayTimer;
   let resizeTimer;
+  let scrollFrame;
   let touchStartX = 0;
   let isInView = false;
 
@@ -49,7 +51,7 @@ if (valueCarousel) {
 
   const startAutoplay = () => {
     stopAutoplay();
-    if (!isInView || reducedMotion.matches || maximumIndex === 0) return;
+    if (!isInView || reducedMotion.matches || maximumIndex === 0 || section.classList.contains('scroll-carousel')) return;
     autoplayTimer = window.setInterval(() => {
       showSlide(currentIndex === maximumIndex ? 0 : currentIndex + 1);
     }, 3200);
@@ -63,8 +65,7 @@ if (valueCarousel) {
       dot.className = 'carousel-dot';
       dot.setAttribute('aria-label', `Mostrar item ${index + 1} do carrossel`);
       dot.addEventListener('click', () => {
-        showSlide(index);
-        startAutoplay();
+        navigateToSlide(index);
       });
       dotsContainer.append(dot);
     }
@@ -80,6 +81,7 @@ if (valueCarousel) {
       card.classList.toggle('is-previous', index === previousIndex);
       card.classList.toggle('is-next', index === nextIndex);
       card.setAttribute('aria-hidden', String(index !== currentIndex));
+      card.tabIndex = index === currentIndex ? 0 : -1;
     });
 
     dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, index) => {
@@ -91,6 +93,59 @@ if (valueCarousel) {
     status.textContent = `Item ${currentIndex + 1} de ${cards.length}`;
   };
 
+  const getHeaderHeight = () => Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header')) || 0;
+
+  const updateSlideFromScroll = () => {
+    scrollFrame = 0;
+    if (!section.classList.contains('scroll-carousel')) return;
+
+    const headerHeight = getHeaderHeight();
+    const sectionRect = section.getBoundingClientRect();
+    const visibleHeight = window.innerHeight - headerHeight;
+    const scrollDistance = Math.max(1, section.offsetHeight - visibleHeight);
+    const progress = Math.min(1, Math.max(0, (headerHeight - sectionRect.top) / scrollDistance));
+    const nextIndex = Math.min(maximumIndex, Math.round(progress * maximumIndex));
+
+    if (nextIndex !== currentIndex) showSlide(nextIndex);
+  };
+
+  const requestScrollUpdate = () => {
+    if (scrollFrame) return;
+    scrollFrame = window.requestAnimationFrame(updateSlideFromScroll);
+  };
+
+  const navigateToSlide = (requestedIndex) => {
+    const nextIndex = (requestedIndex + cards.length) % cards.length;
+    if (!section.classList.contains('scroll-carousel')) {
+      showSlide(nextIndex);
+      startAutoplay();
+      return;
+    }
+
+    const headerHeight = getHeaderHeight();
+    const sectionTop = window.scrollY + section.getBoundingClientRect().top;
+    const visibleHeight = window.innerHeight - headerHeight;
+    const scrollDistance = Math.max(1, section.offsetHeight - visibleHeight);
+    const progress = maximumIndex === 0 ? 0 : nextIndex / maximumIndex;
+    window.scrollTo({
+      top: sectionTop - headerHeight + scrollDistance * progress,
+      behavior: reducedMotion.matches ? 'auto' : 'smooth'
+    });
+  };
+
+  const configureScrollMode = () => {
+    const isEnabled = scrollModeQuery.matches && !reducedMotion.matches;
+    section.classList.toggle('scroll-carousel', isEnabled);
+    if (isEnabled) {
+      section.style.setProperty('--carousel-scroll-distance', `${Math.max(1, cards.length - 1) * 42}svh`);
+      stopAutoplay();
+      requestScrollUpdate();
+    } else {
+      section.style.removeProperty('--carousel-scroll-distance');
+      startAutoplay();
+    }
+  };
+
   const configureCarousel = () => {
     maximumIndex = cards.length - 1;
     renderDots();
@@ -98,13 +153,11 @@ if (valueCarousel) {
   };
 
   previousButton.addEventListener('click', () => {
-    showSlide(currentIndex === 0 ? maximumIndex : currentIndex - 1);
-    startAutoplay();
+    navigateToSlide(currentIndex === 0 ? maximumIndex : currentIndex - 1);
   });
 
   nextButton.addEventListener('click', () => {
-    showSlide(currentIndex === maximumIndex ? 0 : currentIndex + 1);
-    startAutoplay();
+    navigateToSlide(currentIndex === maximumIndex ? 0 : currentIndex + 1);
   });
 
   valueCarousel.addEventListener('keydown', (event) => {
@@ -112,8 +165,7 @@ if (valueCarousel) {
     event.preventDefault();
     const direction = event.key === 'ArrowRight' ? 1 : -1;
     const nextIndex = currentIndex + direction;
-    showSlide(nextIndex > maximumIndex ? 0 : nextIndex < 0 ? maximumIndex : nextIndex);
-    startAutoplay();
+    navigateToSlide(nextIndex > maximumIndex ? 0 : nextIndex < 0 ? maximumIndex : nextIndex);
   });
 
   valueCarousel.addEventListener('pointerenter', stopAutoplay);
@@ -132,7 +184,7 @@ if (valueCarousel) {
     const distance = event.changedTouches[0].clientX - touchStartX;
     if (Math.abs(distance) > 45) {
       const nextIndex = distance < 0 ? currentIndex + 1 : currentIndex - 1;
-      showSlide(nextIndex > maximumIndex ? 0 : nextIndex < 0 ? maximumIndex : nextIndex);
+      navigateToSlide(nextIndex > maximumIndex ? 0 : nextIndex < 0 ? maximumIndex : nextIndex);
     }
     startAutoplay();
   }, { passive: true });
@@ -141,9 +193,11 @@ if (valueCarousel) {
     window.clearTimeout(resizeTimer);
     resizeTimer = window.setTimeout(() => {
       configureCarousel();
-      startAutoplay();
+      configureScrollMode();
     }, 160);
   });
+
+  window.addEventListener('scroll', requestScrollUpdate, { passive: true });
 
   const observer = new IntersectionObserver((entries) => {
     isInView = entries[0].isIntersecting;
@@ -154,8 +208,9 @@ if (valueCarousel) {
     } else {
       stopAutoplay();
     }
-  }, { threshold: .35 });
+  }, { threshold: .2 });
 
   configureCarousel();
+  configureScrollMode();
   observer.observe(section);
 }
