@@ -35,20 +35,13 @@ if (valueCarousel) {
   const status = section.querySelector('[data-carousel-status]');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let currentIndex = 0;
-  let visibleCount = 3;
-  let maximumIndex = 0;
+  let maximumIndex = cards.length - 1;
   let autoplayTimer;
   let resizeTimer;
   let touchStartX = 0;
   let isInView = false;
 
   section.classList.add('carousel-enhanced');
-
-  const getVisibleCount = () => {
-    if (window.innerWidth <= 620) return 1;
-    if (window.innerWidth <= 960) return 2;
-    return 3;
-  };
 
   const stopAutoplay = () => {
     window.clearInterval(autoplayTimer);
@@ -68,7 +61,7 @@ if (valueCarousel) {
       const dot = document.createElement('button');
       dot.type = 'button';
       dot.className = 'carousel-dot';
-      dot.setAttribute('aria-label', `Mostrar grupo ${index + 1} do carrossel`);
+      dot.setAttribute('aria-label', `Mostrar item ${index + 1} do carrossel`);
       dot.addEventListener('click', () => {
         showSlide(index);
         startAutoplay();
@@ -78,14 +71,15 @@ if (valueCarousel) {
   };
 
   const showSlide = (requestedIndex) => {
-    currentIndex = Math.max(0, Math.min(requestedIndex, maximumIndex));
-    const offset = cards[currentIndex]?.offsetLeft || 0;
-    track.style.transform = `translate3d(-${offset}px, 0, 0)`;
+    currentIndex = (requestedIndex + cards.length) % cards.length;
+    const previousIndex = (currentIndex - 1 + cards.length) % cards.length;
+    const nextIndex = (currentIndex + 1) % cards.length;
 
     cards.forEach((card, index) => {
-      const isVisible = index >= currentIndex && index < currentIndex + visibleCount;
       card.classList.toggle('is-current', index === currentIndex);
-      card.setAttribute('aria-hidden', String(!isVisible));
+      card.classList.toggle('is-previous', index === previousIndex);
+      card.classList.toggle('is-next', index === nextIndex);
+      card.setAttribute('aria-hidden', String(index !== currentIndex));
     });
 
     dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, index) => {
@@ -94,14 +88,11 @@ if (valueCarousel) {
       dot.setAttribute('aria-current', isActive ? 'true' : 'false');
     });
 
-    const lastVisible = Math.min(currentIndex + visibleCount, cards.length);
-    status.textContent = `Itens ${currentIndex + 1} a ${lastVisible} de ${cards.length}`;
+    status.textContent = `Item ${currentIndex + 1} de ${cards.length}`;
   };
 
   const configureCarousel = () => {
-    visibleCount = getVisibleCount();
-    maximumIndex = Math.max(0, cards.length - visibleCount);
-    currentIndex = Math.min(currentIndex, maximumIndex);
+    maximumIndex = cards.length - 1;
     renderDots();
     showSlide(currentIndex);
   };
@@ -158,6 +149,7 @@ if (valueCarousel) {
     isInView = entries[0].isIntersecting;
     if (isInView) {
       section.classList.add('carousel-visible');
+      window.setTimeout(() => section.classList.add('carousel-running'), 900);
       window.setTimeout(startAutoplay, 1100);
     } else {
       stopAutoplay();
