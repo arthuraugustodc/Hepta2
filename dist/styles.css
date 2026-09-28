@@ -21,7 +21,7 @@ body {
   font-family: 'Barlow', system-ui, sans-serif;
   font-size: 1rem;
   line-height: 1.65;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 body::before {
   content: '';
@@ -447,7 +447,7 @@ p { margin: 0; }
 
 @media (min-width: 769px) and (min-height: 650px) {
   html:has(body.home-page .values.scroll-carousel) { scroll-snap-type: none; }
-  body.home-page .values.scroll-carousel {
+  body.home-page main > .values.scroll-carousel {
     display: block;
     height: calc(100svh + var(--carousel-scroll-distance, 168svh));
     min-height: 0;
