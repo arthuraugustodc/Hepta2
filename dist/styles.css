@@ -227,12 +227,15 @@ p { margin: 0; }
 .values.carousel-enhanced .value-card {
   position: absolute; inset: 0 auto 0 50%; z-index: 0;
   width: min(58%, 640px); height: 100%; min-height: 0;
-  border: 1px solid var(--line);
+  overflow: hidden;
+  border: 1px solid rgba(187,150,62,.2);
+  border-radius: 18px;
+  background: #151515;
   opacity: 0;
   filter: blur(4px);
   pointer-events: none;
   transform: translateX(-50%) translateY(22px) scale(.78);
-  transition: opacity .65s ease, transform .72s cubic-bezier(.22,.72,.2,1), filter .55s ease, background .3s ease, box-shadow .3s ease;
+  transition: opacity .65s ease, transform .72s cubic-bezier(.22,.72,.2,1), filter .55s ease, background .3s ease, border-color .3s ease, box-shadow .3s ease;
 }
 .values.carousel-visible .value-card.is-previous { z-index: 1; opacity: .3; filter: blur(3px); transform: translateX(-118%) scale(.84); }
 .values.carousel-visible .value-card.is-next { z-index: 1; opacity: .3; filter: blur(3px); transform: translateX(18%) scale(.84); }
@@ -242,8 +245,17 @@ p { margin: 0; }
 .values.carousel-visible .value-card:nth-child(4) { transition-delay: .36s; }
 .values.carousel-visible .value-card:nth-child(5) { transition-delay: .46s; }
 .values.carousel-running .value-card { transition-delay: 0s; }
-.values.carousel-visible .value-card.is-current { z-index: 3; opacity: 1; filter: none; pointer-events: auto; transform: translateX(-50%) scale(1); background: linear-gradient(145deg, rgba(187,150,62,.13), rgba(255,255,255,.022)); box-shadow: inset 0 -2px var(--gold), 0 22px 45px rgba(0,0,0,.28); }
-.values.carousel-enhanced .value-card.is-current:hover { background: linear-gradient(145deg, rgba(187,150,62,.18), rgba(255,255,255,.035)); }
+.values.carousel-visible .value-card.is-current {
+  z-index: 3;
+  opacity: 1;
+  filter: none;
+  pointer-events: auto;
+  transform: translateX(-50%) scale(1);
+  border-color: rgba(187,150,62,.72);
+  background: linear-gradient(145deg, #292316 0%, #1d1b17 52%, #151515 100%);
+  box-shadow: inset 0 1px rgba(255,255,255,.08), inset 0 -3px #bb963e, 0 22px 45px rgba(0,0,0,.34);
+}
+.values.carousel-enhanced .value-card.is-current:hover { background: linear-gradient(145deg, #302817 0%, #211e18 52%, #171717 100%); }
 .values.carousel-enhanced .carousel-controls { display: flex; align-items: center; justify-content: center; gap: .8rem; margin-top: 1.2rem; }
 .carousel-arrow {
   display: grid; place-items: center; width: 42px; height: 42px; padding: 0;
