@@ -308,6 +308,9 @@ p { margin: 0; }
   background-size: 28px 28px;
   mask-image: linear-gradient(90deg, transparent, #000 35%, #000 65%, transparent);
 }
+.process-head { max-width: 900px; margin-inline: auto; text-align: center; }
+.process-head h2 { max-width: 24ch; margin-inline: auto; }
+.process-head .lede { max-width: 55ch; margin-inline: auto; }
 .journey { margin-top: 2.6rem; }
 .journey-map { position: relative; height: 300px; }
 .journey-path { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
