@@ -406,7 +406,11 @@ p { margin: 0; }
 }
 .section-action { margin-top: 3rem; }
 
-.sectors-preview { background: #0e0e0e; }
+.sectors-preview {
+  background:
+    linear-gradient(180deg, rgba(14,14,14,.18), rgba(14,14,14,.46)),
+    url('assets/sectors-background.png') center / cover no-repeat;
+}
 .preview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .preview-card { position: relative; min-height: 210px; padding: 1.6rem; overflow: hidden; background: #121212; text-decoration: none; transition: background .25s ease; }
 .preview-card::after { content: attr(data-index); position: absolute; right: .9rem; bottom: -.35rem; color: rgba(255,255,255,.025); font: 700 4.5rem/1 'Orbitron', sans-serif; }
