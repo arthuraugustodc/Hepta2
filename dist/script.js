@@ -23,6 +23,54 @@ document.querySelectorAll('.faq-question').forEach((button) => {
   });
 });
 
+const journey = document.querySelector('[data-journey]');
+
+if (journey) {
+  const steps = Array.from(journey.querySelectorAll('[data-journey-step]'));
+  const detail = journey.querySelector('[data-journey-detail]');
+  const detailNumber = journey.querySelector('[data-journey-detail-number]');
+  const detailTitle = journey.querySelector('[data-journey-detail-title]');
+  const detailDescription = journey.querySelector('[data-journey-detail-description]');
+  let detailAnimationTimer;
+
+  const selectStep = (selectedStep) => {
+    steps.forEach((step) => {
+      const isSelected = step === selectedStep;
+      step.classList.toggle('is-active', isSelected);
+      step.setAttribute('aria-expanded', String(isSelected));
+    });
+
+    detailNumber.textContent = `Etapa ${selectedStep.dataset.number}`;
+    detailTitle.textContent = selectedStep.dataset.title;
+    detailDescription.textContent = selectedStep.dataset.description;
+
+    window.clearTimeout(detailAnimationTimer);
+    detail.classList.remove('is-updating');
+    void detail.offsetWidth;
+    detail.classList.add('is-updating');
+    detailAnimationTimer = window.setTimeout(() => detail.classList.remove('is-updating'), 380);
+  };
+
+  steps.forEach((step, index) => {
+    step.addEventListener('click', () => selectStep(step));
+    step.addEventListener('keydown', (event) => {
+      const isPrevious = event.key === 'ArrowLeft' || event.key === 'ArrowUp';
+      const isNext = event.key === 'ArrowRight' || event.key === 'ArrowDown';
+      if (!isPrevious && !isNext && event.key !== 'Home' && event.key !== 'End') return;
+
+      event.preventDefault();
+      let nextIndex = index;
+      if (isPrevious) nextIndex = (index - 1 + steps.length) % steps.length;
+      if (isNext) nextIndex = (index + 1) % steps.length;
+      if (event.key === 'Home') nextIndex = 0;
+      if (event.key === 'End') nextIndex = steps.length - 1;
+
+      steps[nextIndex].focus();
+      selectStep(steps[nextIndex]);
+    });
+  });
+}
+
 const valueCarousel = document.querySelector('[data-value-carousel]');
 
 if (valueCarousel) {
