@@ -262,3 +262,100 @@ if (valueCarousel) {
   configureScrollMode();
   observer.observe(section);
 }
+
+const sectorDialog = document.querySelector('[data-sector-dialog]');
+
+if (sectorDialog) {
+  const sectorDetails = {
+    estrategia: {
+      description: 'Conectamos indicadores, sistemas e decisões em uma visão executiva única para tornar a gestão mais previsível e orientada por dados.',
+      examples: ['Cockpit executivo unificado', 'BI prescritivo para planos de ação', 'Governança corporativa automatizada']
+    },
+    financeiro: {
+      description: 'Automatizamos rotinas financeiras e criamos inteligência para reduzir erros, antecipar riscos e melhorar a previsibilidade do caixa.',
+      examples: ['Previsão integrada de receita', 'Auditoria contábil automatizada', 'Faturamento ponta a ponta']
+    },
+    comercial: {
+      description: 'Estruturamos tecnologia para organizar o funil, priorizar oportunidades e dar ao time comercial mais contexto para vender melhor.',
+      examples: ['CRM conversacional com IA', 'Distribuição inteligente de leads', 'Previsibilidade de vendas e receita']
+    },
+    marketing: {
+      description: 'Integramos campanhas, canais e resultados para transformar dados de marketing em decisões claras sobre investimento e crescimento.',
+      examples: ['Atribuição omnichannel', 'Planejamento preditivo de orçamento', 'Orquestração de campanhas e fluxos']
+    },
+    atendimento: {
+      description: 'Unificamos histórico, suporte e sinais de relacionamento para oferecer respostas mais rápidas e agir antes que um cliente se perca.',
+      examples: ['Atendimento contextual com IA', 'Alerta de risco de churn', 'Base de conhecimento viva']
+    },
+    operacoes: {
+      description: 'Conectamos processos e sistemas para revelar gargalos, automatizar decisões repetitivas e aumentar a capacidade operacional.',
+      examples: ['Orquestração de processos', 'BI operacional de gargalos', 'Gestão inteligente de capacidade']
+    },
+    rh: {
+      description: 'Digitalizamos a jornada das pessoas para simplificar solicitações, acessos, documentos e rotinas internas com mais segurança.',
+      examples: ['Onboarding digital automatizado', 'Central de solicitações internas', 'Governança automática de acessos']
+    },
+    dados: {
+      description: 'Organizamos e conectamos os dados da empresa para garantir qualidade, acesso seguro e inteligência pronta para apoiar decisões.',
+      examples: ['Data lakehouse corporativo', 'BI conversacional', 'Automação de qualidade e pipelines']
+    }
+  };
+
+  const cards = document.querySelectorAll('.preview-card[data-sector]');
+  const closeButton = sectorDialog.querySelector('[data-sector-dialog-close]');
+  const indexElement = sectorDialog.querySelector('[data-sector-dialog-index]');
+  const iconUse = sectorDialog.querySelector('[data-sector-dialog-icon]');
+  const titleElement = sectorDialog.querySelector('[data-sector-dialog-title]');
+  const descriptionElement = sectorDialog.querySelector('[data-sector-dialog-description]');
+  const listElement = sectorDialog.querySelector('[data-sector-dialog-list]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let lastTrigger;
+  let closeTimer;
+
+  const closeSectorDialog = () => {
+    if (!sectorDialog.open || sectorDialog.classList.contains('is-closing')) return;
+    sectorDialog.classList.add('is-closing');
+    window.clearTimeout(closeTimer);
+    closeTimer = window.setTimeout(() => sectorDialog.close(), reducedMotion.matches ? 0 : 230);
+  };
+
+  const openSectorDialog = (card) => {
+    const detail = sectorDetails[card.dataset.sector];
+    if (!detail) return;
+
+    lastTrigger = card;
+    indexElement.textContent = card.dataset.index;
+    titleElement.textContent = card.querySelector('h3').textContent;
+    descriptionElement.textContent = detail.description;
+    iconUse.setAttribute('href', card.querySelector('use').getAttribute('href'));
+    listElement.replaceChildren(...detail.examples.map((example) => {
+      const item = document.createElement('li');
+      item.textContent = example;
+      return item;
+    }));
+
+    sectorDialog.classList.remove('is-closing');
+    document.body.classList.add('sector-dialog-open');
+    sectorDialog.showModal();
+    closeButton.focus();
+  };
+
+  cards.forEach((card) => card.addEventListener('click', () => openSectorDialog(card)));
+  closeButton.addEventListener('click', closeSectorDialog);
+
+  sectorDialog.addEventListener('click', (event) => {
+    if (event.target === sectorDialog) closeSectorDialog();
+  });
+
+  sectorDialog.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    closeSectorDialog();
+  });
+
+  sectorDialog.addEventListener('close', () => {
+    window.clearTimeout(closeTimer);
+    sectorDialog.classList.remove('is-closing');
+    document.body.classList.remove('sector-dialog-open');
+    lastTrigger?.focus();
+  });
+}

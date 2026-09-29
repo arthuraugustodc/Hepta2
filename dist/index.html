@@ -130,18 +130,37 @@
           </div>
         </div>
         <div class="preview-grid">
-          <a class="preview-card" href="/setores/#estrategia" data-index="01"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#strategy"></use></svg><h3>Estratégia &amp; Gestão</h3><span>Governança, BI e visão executiva</span></a>
-          <a class="preview-card" href="/setores/#financeiro" data-index="02"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#finance"></use></svg><h3>Financeiro</h3><span>Previsão, auditoria e automação</span></a>
-          <a class="preview-card" href="/setores/#comercial" data-index="03"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#sales"></use></svg><h3>Comercial &amp; Vendas</h3><span>CRM, leads e previsibilidade</span></a>
-          <a class="preview-card" href="/setores/#marketing" data-index="04"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#marketing"></use></svg><h3>Marketing</h3><span>Campanhas, atribuição e decisão</span></a>
-          <a class="preview-card" href="/setores/#atendimento" data-index="05"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#service"></use></svg><h3>Atendimento &amp; Customer Success</h3><span>Suporte, retenção e contexto</span></a>
-          <a class="preview-card" href="/setores/#operacoes" data-index="06"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#operations"></use></svg><h3>Operações</h3><span>Processos, capacidade e eficiência</span></a>
-          <a class="preview-card" href="/setores/#rh" data-index="07"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#people"></use></svg><h3>Recursos Humanos</h3><span>Jornada, acessos e atendimento</span></a>
-          <a class="preview-card" href="/setores/#dados" data-index="13"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#data"></use></svg><h3>Dados &amp; Inteligência</h3><span>Qualidade, acesso e previsão</span></a>
+          <button class="preview-card" type="button" data-index="01" data-sector="estrategia" aria-haspopup="dialog"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#strategy"></use></svg><h3>Estratégia &amp; Gestão</h3><span>Governança, BI e visão executiva</span></button>
+          <button class="preview-card" type="button" data-index="02" data-sector="financeiro" aria-haspopup="dialog"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#finance"></use></svg><h3>Financeiro</h3><span>Previsão, auditoria e automação</span></button>
+          <button class="preview-card" type="button" data-index="03" data-sector="comercial" aria-haspopup="dialog"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#sales"></use></svg><h3>Comercial &amp; Vendas</h3><span>CRM, leads e previsibilidade</span></button>
+          <button class="preview-card" type="button" data-index="04" data-sector="marketing" aria-haspopup="dialog"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#marketing"></use></svg><h3>Marketing</h3><span>Campanhas, atribuição e decisão</span></button>
+          <button class="preview-card" type="button" data-index="05" data-sector="atendimento" aria-haspopup="dialog"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#service"></use></svg><h3>Atendimento &amp; Customer Success</h3><span>Suporte, retenção e contexto</span></button>
+          <button class="preview-card" type="button" data-index="06" data-sector="operacoes" aria-haspopup="dialog"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#operations"></use></svg><h3>Operações</h3><span>Processos, capacidade e eficiência</span></button>
+          <button class="preview-card" type="button" data-index="07" data-sector="rh" aria-haspopup="dialog"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#people"></use></svg><h3>Recursos Humanos</h3><span>Jornada, acessos e atendimento</span></button>
+          <button class="preview-card" type="button" data-index="08" data-sector="dados" aria-haspopup="dialog"><svg class="sector-icon" aria-hidden="true"><use href="assets/area-icons.svg#data"></use></svg><h3>Dados &amp; Inteligência</h3><span>Qualidade, acesso e previsão</span></button>
         </div>
-        <div class="section-action"><a class="button" href="/setores/">Ver todos os setores <span aria-hidden="true">→</span></a></div>
       </div>
     </section>
+
+    <dialog class="sector-dialog" data-sector-dialog aria-labelledby="sector-dialog-title" aria-describedby="sector-dialog-description">
+      <article class="sector-sheet">
+        <div class="sector-sheet-handle" aria-hidden="true"></div>
+        <button class="sector-dialog-close" type="button" data-sector-dialog-close aria-label="Fechar detalhes do setor">×</button>
+        <div class="sector-dialog-content">
+          <div class="sector-dialog-heading">
+            <span class="sector-dialog-index" data-sector-dialog-index>01</span>
+            <svg class="sector-dialog-icon" aria-hidden="true"><use data-sector-dialog-icon></use></svg>
+            <p class="section-label">Setor em foco</p>
+            <h2 id="sector-dialog-title" data-sector-dialog-title></h2>
+          </div>
+          <div class="sector-dialog-detail">
+            <p id="sector-dialog-description" class="sector-dialog-description" data-sector-dialog-description></p>
+            <p class="sector-dialog-list-label">Exemplos de aplicação</p>
+            <ul class="sector-dialog-list" data-sector-dialog-list></ul>
+          </div>
+        </div>
+      </article>
+    </dialog>
 
     <section class="proof section" aria-labelledby="prova-title">
       <div class="container proof-grid">
