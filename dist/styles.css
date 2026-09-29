@@ -211,6 +211,16 @@ p { margin: 0; }
 .values { background: #101010; }
 .section-head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; }
 .section-head .lede { max-width: 42ch; }
+.values .section-head {
+  max-width: 900px;
+  margin-inline: auto;
+  flex-direction: column;
+  align-items: center;
+  gap: .8rem;
+  text-align: center;
+}
+.values .section-head h2 { max-width: 24ch; margin-inline: auto; }
+.values .section-head .lede { max-width: 55ch; margin-top: 0; }
 .value-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); }
 .value-card {
   position: relative;
