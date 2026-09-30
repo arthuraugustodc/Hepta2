@@ -537,6 +537,13 @@ body.sector-dialog-open { overflow: hidden; }
 .proof-stat + .proof-stat { border-left: 1px solid var(--line); }
 .stat-number { display: block; margin-bottom: 1.2rem; color: var(--gold); font: 700 clamp(1.45rem, 2.15vw, 2.1rem)/1 'Orbitron', sans-serif; white-space: nowrap; }
 .proof-stat p { max-width: 25ch; margin: 0; color: var(--muted); font-size: clamp(.94rem, 1.05vw, 1.05rem); line-height: 1.55; }
+.proof.is-counting .stat-number { transform-origin: left center; animation: stat-number-grow 1.15s cubic-bezier(.2, .8, .2, 1) both; animation-delay: var(--count-delay, 0ms); }
+
+@keyframes stat-number-grow {
+  0% { opacity: .15; transform: translateY(12px) scale(.62); filter: blur(3px); }
+  68% { opacity: 1; transform: translateY(0) scale(1.08); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
 
 .difference-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 3.2rem; }
 .difference-card { position: relative; padding: 2rem; border: 1px solid var(--line); background: rgba(255,255,255,.018); }
@@ -824,4 +831,5 @@ body.sector-dialog-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
   .hero-copy > *, .hero-signature { opacity: 1; transform: none; }
+  .proof .stat-number { opacity: 1; transform: none; filter: none; }
 }
