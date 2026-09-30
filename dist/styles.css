@@ -125,7 +125,15 @@ p { margin: 0; }
 .header-cta { min-height: 42px; padding: .7rem 1rem; font-size: .72rem; }
 .text-link { display: inline-flex; align-items: center; gap: .6rem; color: var(--paper); font-weight: 500; text-underline-offset: .3rem; }
 
-.hero { min-height: 100svh; padding: calc(var(--header) + 3rem) 0 3.5rem; display: grid; align-items: center; }
+.hero {
+  min-height: 100svh;
+  padding: calc(var(--header) + 3rem) 0 3.5rem;
+  display: grid;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(7,7,7,.94) 0%, rgba(7,7,7,.78) 46%, rgba(7,7,7,.38) 100%),
+    url('assets/hero-network-background.png') center bottom / cover no-repeat;
+}
 .hero::before {
   content: ''; position: absolute; width: min(70vw, 760px); aspect-ratio: 1; right: -18%; top: 4%; border-radius: 50%;
   background: repeating-radial-gradient(circle, transparent 0 48px, rgba(187,150,62,.085) 49px 50px);
