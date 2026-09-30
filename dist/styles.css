@@ -529,10 +529,11 @@ body.sector-dialog-open { overflow: hidden; }
 
 .proof { overflow: hidden; }
 .proof::after { content: 'HEPTA'; position: absolute; right: -2vw; bottom: -1.5rem; color: rgba(255,255,255,.018); font: 700 clamp(6rem, 16vw, 15rem)/1 'Orbitron', sans-serif; letter-spacing: .05em; }
-.proof-grid { position: relative; z-index: 1; display: grid; grid-template-columns: .75fr 1fr 1fr; border: 1px solid var(--line); }
-.proof-intro, .proof-stat { min-height: 280px; padding: clamp(1.7rem, 4vw, 3rem); }
-.proof-intro { display: flex; flex-direction: column; justify-content: space-between; background: var(--gold-soft); }
-.proof-stat { border-left: 1px solid var(--line); }
+.proof-heading { position: relative; z-index: 1; margin-bottom: clamp(1.75rem, 4vw, 3rem); text-align: center; }
+.proof-heading h2 { max-width: 24ch; margin-inline: auto; }
+.proof-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--line); }
+.proof-stat { min-height: 280px; padding: clamp(1.7rem, 4vw, 3rem); }
+.proof-stat + .proof-stat { border-left: 1px solid var(--line); }
 .stat-number { display: block; margin-bottom: 1.2rem; color: var(--gold); font: 700 clamp(2.8rem, 5vw, 4.4rem)/1 'Orbitron', sans-serif; }
 .proof-stat p { max-width: 25ch; color: var(--muted); font-size: 1.05rem; }
 
@@ -662,7 +663,6 @@ body.sector-dialog-open { overflow: hidden; }
   body.home-page .journey-detail { min-height: 105px; padding-block: 1rem; }
   body.home-page .preview-card { min-height: 168px; }
   body.home-page .sector-icon { margin-bottom: 2rem; }
-  body.home-page .proof-intro,
   body.home-page .proof-stat { min-height: 230px; }
   body.home-page .difference-grid { margin-top: 2.25rem; }
   body.home-page .section-action { margin-top: 2.25rem; }
@@ -696,7 +696,6 @@ body.sector-dialog-open { overflow: hidden; }
   body.home-page .preview-card { min-height: 145px; padding: 1.2rem; }
   body.home-page .sector-icon { margin-bottom: 1.35rem; }
   body.home-page .preview-card::after { font-size: 3.7rem; }
-  body.home-page .proof-intro,
   body.home-page .proof-stat { min-height: 195px; padding: 1.75rem; }
   body.home-page .proof-stat p { font-size: .96rem; }
   body.home-page .difference-grid { margin-top: 1.75rem; }
@@ -751,7 +750,6 @@ body.sector-dialog-open { overflow: hidden; }
   .journey-detail { max-width: 620px; }
   .preview-grid { grid-template-columns: repeat(2, 1fr); }
   .proof-grid { grid-template-columns: 1fr 1fr; }
-  .proof-intro { grid-column: 1 / -1; min-height: 200px; }
   .difference-grid { grid-template-columns: 1fr; }
   .faq-wrap { grid-template-columns: 1fr; }
   .footer-main { grid-template-columns: 1fr 1fr; }
@@ -799,8 +797,7 @@ body.sector-dialog-open { overflow: hidden; }
   .sector-dialog-icon { width: 44px; height: 44px; margin-bottom: 1.2rem; }
   .sector-dialog-list { grid-template-columns: 1fr; }
   .sector-dialog-list li { min-height: 0; }
-  .proof-intro { grid-column: auto; }
-  .proof-stat { border-left: 0; border-top: 1px solid var(--line); }
+  .proof-stat + .proof-stat { border-left: 0; border-top: 1px solid var(--line); }
   .cta-row { align-items: stretch; flex-direction: column; }
   .cta-row .button { width: 100%; }
   .site-footer { padding-top: 2rem; }
