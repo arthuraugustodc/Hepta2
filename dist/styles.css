@@ -532,7 +532,7 @@ body.sector-dialog-open { overflow: hidden; }
 .proof-heading { position: relative; z-index: 1; margin-bottom: clamp(1.75rem, 4vw, 3rem); text-align: center; }
 .proof-heading h2 { max-width: 24ch; margin-inline: auto; }
 .proof-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 1fr; align-items: stretch; border: 1px solid var(--line); }
-.proof-stat { display: flex; min-width: 0; min-height: 290px; height: 100%; box-sizing: border-box; flex-direction: column; justify-content: center; padding: clamp(1.65rem, 2.6vw, 2.5rem); overflow-wrap: anywhere; }
+.proof-stat { display: flex; min-width: 0; min-height: 310px; height: 100%; box-sizing: border-box; flex-direction: column; justify-content: center; padding: clamp(1.85rem, 3vw, 2.75rem); overflow-wrap: anywhere; }
 .proof-stat + .proof-stat { border-left: 1px solid var(--line); }
 .stat-number { display: block; margin-bottom: 1.2rem; color: var(--gold); font: 700 clamp(2.2rem, 2.8vw, 3.1rem)/1 'Orbitron', sans-serif; white-space: nowrap; }
 .proof-stat p { max-width: 25ch; margin: 0; color: var(--muted); font-size: clamp(.94rem, 1.05vw, 1.05rem); line-height: 1.55; }
@@ -663,7 +663,7 @@ body.sector-dialog-open { overflow: hidden; }
   body.home-page .journey-detail { min-height: 105px; padding-block: 1rem; }
   body.home-page .preview-card { min-height: 168px; }
   body.home-page .sector-icon { margin-bottom: 2rem; }
-  body.home-page .proof-stat { min-height: 250px; }
+  body.home-page .proof-stat { min-height: 280px; }
   body.home-page .difference-grid { margin-top: 2.25rem; }
   body.home-page .section-action { margin-top: 2.25rem; }
 }
@@ -696,7 +696,7 @@ body.sector-dialog-open { overflow: hidden; }
   body.home-page .preview-card { min-height: 145px; padding: 1.2rem; }
   body.home-page .sector-icon { margin-bottom: 1.35rem; }
   body.home-page .preview-card::after { font-size: 3.7rem; }
-  body.home-page .proof-stat { min-height: 225px; padding: 1.6rem; }
+  body.home-page .proof-stat { min-height: 260px; padding: 1.85rem; }
   body.home-page .proof-stat p { font-size: .96rem; }
   body.home-page .difference-grid { margin-top: 1.75rem; }
   body.home-page .difference-card { padding: 1.35rem; }
@@ -726,6 +726,13 @@ body.sector-dialog-open { overflow: hidden; }
   body.home-page .values.scroll-carousel .carousel-controls { margin-top: 1rem; }
 }
 
+@media (max-width: 1200px) {
+  .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .proof-stat { min-height: 260px; }
+  .proof-stat:nth-child(odd) { border-left: 0; }
+  .proof-stat:nth-child(n + 3) { border-top: 1px solid var(--line); }
+}
+
 @media (max-width: 960px) {
   .nav { position: fixed; inset: var(--header) 0 auto; display: none; padding: 1.4rem 20px 2rem; flex-direction: column; align-items: stretch; gap: 0; background: #121212; border-bottom: 1px solid var(--line); }
   .nav.open { display: flex; }
@@ -749,10 +756,6 @@ body.sector-dialog-open { overflow: hidden; }
   .journey-step { left: var(--mx); top: var(--my); width: min(44vw, 180px); }
   .journey-detail { max-width: 620px; }
   .preview-grid { grid-template-columns: repeat(2, 1fr); }
-  .proof-grid { grid-template-columns: 1fr 1fr; }
-  .proof-stat { min-height: 240px; }
-  .proof-stat:nth-child(odd) { border-left: 0; }
-  .proof-stat:nth-child(n + 3) { border-top: 1px solid var(--line); }
   .difference-grid { grid-template-columns: 1fr; }
   .faq-wrap { grid-template-columns: 1fr; }
   .footer-main { grid-template-columns: 1fr 1fr; }
@@ -801,7 +804,7 @@ body.sector-dialog-open { overflow: hidden; }
   .sector-dialog-list { grid-template-columns: 1fr; }
   .sector-dialog-list li { min-height: 0; }
   .proof-stat + .proof-stat { border-left: 0; border-top: 1px solid var(--line); }
-  .proof-stat { min-height: 220px; }
+  .proof-stat { min-height: 240px; }
   .cta-row { align-items: stretch; flex-direction: column; }
   .cta-row .button { width: 100%; }
   .site-footer { padding-top: 2rem; }
