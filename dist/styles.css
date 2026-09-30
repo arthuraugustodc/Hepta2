@@ -531,11 +531,12 @@ body.sector-dialog-open { overflow: hidden; }
 .proof::after { content: 'HEPTA'; position: absolute; right: -2vw; bottom: -1.5rem; color: rgba(255,255,255,.018); font: 700 clamp(6rem, 16vw, 15rem)/1 'Orbitron', sans-serif; letter-spacing: .05em; }
 .proof-heading { position: relative; z-index: 1; margin-bottom: clamp(1.75rem, 4vw, 3rem); text-align: center; }
 .proof-heading h2 { max-width: 24ch; margin-inline: auto; }
-.proof-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--line); }
+.proof-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); }
 .proof-stat { min-height: 280px; padding: clamp(1.7rem, 4vw, 3rem); }
 .proof-stat + .proof-stat { border-left: 1px solid var(--line); }
 .stat-number { display: block; margin-bottom: 1.2rem; color: var(--gold); font: 700 clamp(2.8rem, 5vw, 4.4rem)/1 'Orbitron', sans-serif; }
 .proof-stat p { max-width: 25ch; color: var(--muted); font-size: 1.05rem; }
+.proof-stat-money .stat-number { font-size: clamp(1.65rem, 2.45vw, 2.55rem); white-space: nowrap; }
 
 .difference-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 3.2rem; }
 .difference-card { position: relative; padding: 2rem; border: 1px solid var(--line); background: rgba(255,255,255,.018); }
@@ -750,6 +751,8 @@ body.sector-dialog-open { overflow: hidden; }
   .journey-detail { max-width: 620px; }
   .preview-grid { grid-template-columns: repeat(2, 1fr); }
   .proof-grid { grid-template-columns: 1fr 1fr; }
+  .proof-stat:nth-child(odd) { border-left: 0; }
+  .proof-stat:nth-child(n + 3) { border-top: 1px solid var(--line); }
   .difference-grid { grid-template-columns: 1fr; }
   .faq-wrap { grid-template-columns: 1fr; }
   .footer-main { grid-template-columns: 1fr 1fr; }
