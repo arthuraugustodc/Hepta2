@@ -532,12 +532,11 @@ body.sector-dialog-open { overflow: hidden; }
 .proof::after { content: 'HEPTA'; position: absolute; right: -2vw; bottom: -1.5rem; color: rgba(255,255,255,.018); font: 700 clamp(6rem, 16vw, 15rem)/1 'Orbitron', sans-serif; letter-spacing: .05em; }
 .proof-heading { position: relative; z-index: 1; margin-bottom: clamp(1.75rem, 4vw, 3rem); text-align: center; }
 .proof-heading h2 { max-width: 24ch; margin-inline: auto; }
-.proof-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 1fr; align-items: stretch; border: 1px solid var(--line); }
-.proof-stat { display: flex; min-width: 0; min-height: 340px; height: 100%; box-sizing: border-box; flex-direction: column; justify-content: center; padding: clamp(2rem, 3.2vw, 3rem); overflow-wrap: anywhere; }
-.proof-stat + .proof-stat { border-left: 1px solid var(--line); }
-.stat-number { display: block; margin-bottom: 1.2rem; color: var(--gold); font: 700 clamp(1.45rem, 2.15vw, 2.1rem)/1 'Orbitron', sans-serif; white-space: nowrap; }
-.proof-stat p { max-width: 25ch; margin: 0; color: var(--muted); font-size: clamp(.94rem, 1.05vw, 1.05rem); line-height: 1.55; }
-.proof.is-counting .stat-number { transform-origin: left center; animation: stat-number-grow 1.15s cubic-bezier(.2, .8, .2, 1) both; animation-delay: var(--count-delay, 0ms); }
+.proof-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 1fr; align-items: stretch; gap: clamp(.75rem, 1.25vw, 1.15rem); }
+.proof-stat { display: flex; min-width: 0; min-height: 220px; height: 100%; box-sizing: border-box; flex-direction: column; align-items: center; justify-content: center; padding: clamp(1.75rem, 2.6vw, 2.5rem); overflow-wrap: anywhere; border: 1px solid rgba(216, 176, 88, .38); border-radius: 14px; background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.012)); box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 16px 38px rgba(0,0,0,.16); text-align: center; }
+.stat-number { display: block; margin-bottom: .85rem; color: var(--gold); font: 700 clamp(1.45rem, 2.15vw, 2.1rem)/1 'Orbitron', sans-serif; white-space: nowrap; }
+.proof-stat p { max-width: 28ch; margin: 0 auto; color: var(--muted); font-size: clamp(.94rem, 1.05vw, 1.05rem); line-height: 1.5; }
+.proof.is-counting .stat-number { transform-origin: center; animation: stat-number-grow 1.15s cubic-bezier(.2, .8, .2, 1) both; animation-delay: var(--count-delay, 0ms); }
 
 @keyframes stat-number-grow {
   0% { opacity: .15; transform: translateY(12px) scale(.62); filter: blur(3px); }
@@ -671,7 +670,7 @@ body.sector-dialog-open { overflow: hidden; }
   body.home-page .journey-detail { min-height: 105px; padding-block: 1rem; }
   body.home-page .preview-card { min-height: 168px; }
   body.home-page .sector-icon { margin-bottom: 2rem; }
-  body.home-page .proof-stat { min-height: 310px; }
+  body.home-page .proof-stat { min-height: 210px; }
   body.home-page .difference-grid { margin-top: 2.25rem; }
   body.home-page .section-action { margin-top: 2.25rem; }
 }
@@ -704,7 +703,7 @@ body.sector-dialog-open { overflow: hidden; }
   body.home-page .preview-card { min-height: 145px; padding: 1.2rem; }
   body.home-page .sector-icon { margin-bottom: 1.35rem; }
   body.home-page .preview-card::after { font-size: 3.7rem; }
-  body.home-page .proof-stat { min-height: 290px; padding: 2rem; }
+  body.home-page .proof-stat { min-height: 200px; padding: 1.75rem; }
   body.home-page .proof-stat p { font-size: .96rem; }
   body.home-page .difference-grid { margin-top: 1.75rem; }
   body.home-page .difference-card { padding: 1.35rem; }
@@ -736,9 +735,7 @@ body.sector-dialog-open { overflow: hidden; }
 
 @media (max-width: 1200px) {
   .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .proof-stat { min-height: 290px; }
-  .proof-stat:nth-child(odd) { border-left: 0; }
-  .proof-stat:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  .proof-stat { min-height: 210px; }
 }
 
 @media (max-width: 960px) {
@@ -811,8 +808,7 @@ body.sector-dialog-open { overflow: hidden; }
   .sector-dialog-icon { width: 44px; height: 44px; margin-bottom: 1.2rem; }
   .sector-dialog-list { grid-template-columns: 1fr; }
   .sector-dialog-list li { min-height: 0; }
-  .proof-stat + .proof-stat { border-left: 0; border-top: 1px solid var(--line); }
-  .proof-stat { min-height: 260px; }
+  .proof-stat { min-height: 190px; }
   .cta-row { align-items: stretch; flex-direction: column; }
   .cta-row .button { width: 100%; }
   .site-footer { padding-top: 2rem; }
