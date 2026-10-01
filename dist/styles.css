@@ -310,6 +310,11 @@ p { margin: 0; }
 .site-footer { border-top: 1px solid var(--line); padding: 2rem 0; }
 .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 2rem; color: var(--muted); font-size: .9rem; }
 
+.blueprint {
+  background:
+    linear-gradient(180deg, rgba(10,10,10,.36), rgba(10,10,10,.22)),
+    url('assets/process-map-background.png') center / cover no-repeat;
+}
 .blueprint::before {
   content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .22;
   background-image: radial-gradient(circle at center, rgba(187,150,62,.65) 0 1px, transparent 1.5px);
