@@ -542,7 +542,6 @@ body.sector-dialog-open { overflow: hidden; }
 .proof-background-video { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 .proof::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(12,12,12,.54), rgba(12,12,12,.68)); }
 .proof .container { position: relative; z-index: 2; width: min(calc(100% - 32px), 1380px); }
-.proof::after { content: 'HEPTA'; position: absolute; z-index: 1; right: -2vw; bottom: -1.5rem; color: rgba(187,150,62,.12); font: 700 clamp(6rem, 16vw, 15rem)/1 'Orbitron', sans-serif; letter-spacing: .05em; }
 .proof-heading { position: relative; z-index: 1; margin-bottom: clamp(1.75rem, 4vw, 3rem); text-align: center; }
 .proof-heading h2 { max-width: 24ch; margin-inline: auto; color: var(--paper); text-shadow: 0 3px 18px rgba(0,0,0,.5); }
 .proof .section-label, .proof-highlight { color: #BB963E; }
