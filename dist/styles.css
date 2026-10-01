@@ -529,13 +529,14 @@ body.sector-dialog-open { overflow: hidden; }
 
 .proof { overflow: hidden; color: #111820; background: #ffffff; }
 .proof .container { width: min(calc(100% - 32px), 1380px); }
-.proof::after { content: 'HEPTA'; position: absolute; right: -2vw; bottom: -1.5rem; color: rgba(17,24,32,.035); font: 700 clamp(6rem, 16vw, 15rem)/1 'Orbitron', sans-serif; letter-spacing: .05em; }
+.proof::after { content: 'HEPTA'; position: absolute; right: -2vw; bottom: -1.5rem; color: rgba(187,150,62,.08); font: 700 clamp(6rem, 16vw, 15rem)/1 'Orbitron', sans-serif; letter-spacing: .05em; }
 .proof-heading { position: relative; z-index: 1; margin-bottom: clamp(1.75rem, 4vw, 3rem); text-align: center; }
 .proof-heading h2 { max-width: 24ch; margin-inline: auto; color: #111820; }
-.proof .section-label { color: #8d6b1d; }
+.proof .section-label, .proof-highlight { color: #BB963E; }
 .proof-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 1fr; align-items: stretch; gap: clamp(.75rem, 1.25vw, 1.15rem); }
-.proof-stat { display: flex; min-width: 0; min-height: 220px; height: 100%; box-sizing: border-box; flex-direction: column; align-items: center; justify-content: center; padding: clamp(1.75rem, 2.6vw, 2.5rem); overflow-wrap: anywhere; border: 1px solid rgba(25,45,62,.2); border-radius: 14px; background: #ffffff; box-shadow: 0 20px 46px rgba(15,31,44,.13), 0 4px 12px rgba(15,31,44,.08); text-align: center; }
-.stat-number { display: block; margin-bottom: .85rem; color: #8d6b1d; font: 700 clamp(1.45rem, 2.15vw, 2.1rem)/1 'Orbitron', sans-serif; white-space: nowrap; }
+.proof-stat { position: relative; display: flex; min-width: 0; min-height: 220px; height: 100%; box-sizing: border-box; flex-direction: column; align-items: center; justify-content: center; padding: clamp(1.75rem, 2.6vw, 2.5rem); overflow: hidden; overflow-wrap: anywhere; border: 1px solid rgba(187,150,62,.48); border-radius: 14px; background: #ffffff; box-shadow: 0 20px 46px rgba(15,31,44,.13), 0 4px 12px rgba(187,150,62,.14); text-align: center; }
+.proof-stat::before { content: ''; width: 42px; height: 1px; margin-bottom: 1rem; background: #BB963E; box-shadow: 0 0 12px rgba(187,150,62,.4); }
+.stat-number { display: block; margin-bottom: .85rem; color: #BB963E; font: 700 clamp(1.45rem, 2.15vw, 2.1rem)/1 'Orbitron', sans-serif; white-space: nowrap; }
 .proof-stat p { max-width: 28ch; margin: 0 auto; color: #4c5965; font-size: clamp(.94rem, 1.05vw, 1.05rem); line-height: 1.5; }
 .proof.is-counting .stat-number { transform-origin: center; animation: stat-number-grow 1.15s cubic-bezier(.2, .8, .2, 1) both; animation-delay: var(--count-delay, 0ms); }
 
