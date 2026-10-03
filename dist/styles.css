@@ -695,21 +695,22 @@ body.sector-dialog-open { overflow: hidden; }
 .sector-card .button { align-self: flex-start; min-height: 42px; margin-top: auto; padding: .72rem 1rem; font-size: .72rem; }
 
 @media (min-width: 961px) and (min-height: 620px) {
-  html:has(body.home-page) { scroll-snap-type: y proximity; }
+  html:has(body.home-page) { scroll-snap-type: y mandatory; scroll-padding-top: var(--header); }
   body.home-page main > .section:not(.hero) {
     min-height: calc(100svh - var(--header));
     display: grid;
     align-items: center;
     padding-block: clamp(3rem, 6vh, 5.5rem);
     scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    scroll-snap-stop: always;
   }
-  body.home-page .hero { scroll-snap-align: start; }
+  body.home-page .hero { scroll-snap-align: start; scroll-snap-stop: always; }
   body.home-page .final-cta {
-    min-height: 58svh;
+    min-height: calc(100svh - var(--header));
     display: grid;
     align-items: center;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
   body.home-page .site-footer { scroll-snap-align: end; }
 }
@@ -777,12 +778,14 @@ body.sector-dialog-open { overflow: hidden; }
 }
 
 @media (min-width: 769px) and (min-height: 650px) {
-  html:has(body.home-page .values.scroll-carousel) { scroll-snap-type: none; }
+  html:has(body.home-page .values.scroll-carousel) { scroll-snap-type: y mandatory; scroll-padding-top: var(--header); }
   body.home-page main > .values.scroll-carousel {
     display: block;
     height: calc(100svh + var(--carousel-scroll-distance, 168svh));
     min-height: 0;
     padding: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
   body.home-page .values.scroll-carousel > .container {
     position: sticky;
