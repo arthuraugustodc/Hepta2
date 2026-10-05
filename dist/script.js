@@ -32,8 +32,13 @@ if (journey) {
   const detailTitle = journey.querySelector('[data-journey-detail-title]');
   const detailDescription = journey.querySelector('[data-journey-detail-description]');
   let detailAnimationTimer;
+  let checkpointTimer;
+  let currentStepIndex = Math.max(0, steps.findIndex((step) => step.classList.contains('is-active')));
+  let isJourneyInView = false;
+  let isJourneyPaused = false;
 
   const selectStep = (selectedStep) => {
+    currentStepIndex = steps.indexOf(selectedStep);
     steps.forEach((step) => {
       const isSelected = step === selectedStep;
       step.classList.toggle('is-active', isSelected);
@@ -51,8 +56,25 @@ if (journey) {
     detailAnimationTimer = window.setTimeout(() => detail.classList.remove('is-updating'), 380);
   };
 
+  const stopCheckpointRotation = () => {
+    window.clearInterval(checkpointTimer);
+  };
+
+  const startCheckpointRotation = () => {
+    stopCheckpointRotation();
+    if (!isJourneyInView || isJourneyPaused || document.hidden || steps.length < 2) return;
+
+    checkpointTimer = window.setInterval(() => {
+      currentStepIndex = (currentStepIndex + 1) % steps.length;
+      selectStep(steps[currentStepIndex]);
+    }, 3000);
+  };
+
   steps.forEach((step, index) => {
-    step.addEventListener('click', () => selectStep(step));
+    step.addEventListener('click', () => {
+      selectStep(step);
+      startCheckpointRotation();
+    });
     step.addEventListener('keydown', (event) => {
       const isPrevious = event.key === 'ArrowLeft' || event.key === 'ArrowUp';
       const isNext = event.key === 'ArrowRight' || event.key === 'ArrowDown';
@@ -67,8 +89,41 @@ if (journey) {
 
       steps[nextIndex].focus();
       selectStep(steps[nextIndex]);
+      startCheckpointRotation();
     });
   });
+
+  journey.addEventListener('mouseenter', () => {
+    isJourneyPaused = true;
+    stopCheckpointRotation();
+  });
+
+  journey.addEventListener('mouseleave', () => {
+    isJourneyPaused = false;
+    startCheckpointRotation();
+  });
+
+  journey.addEventListener('focusin', () => {
+    isJourneyPaused = true;
+    stopCheckpointRotation();
+  });
+
+  journey.addEventListener('focusout', () => {
+    window.setTimeout(() => {
+      if (journey.contains(document.activeElement)) return;
+      isJourneyPaused = false;
+      startCheckpointRotation();
+    }, 0);
+  });
+
+  const journeyObserver = new IntersectionObserver((entries) => {
+    isJourneyInView = entries[0].isIntersecting;
+    if (isJourneyInView) startCheckpointRotation();
+    else stopCheckpointRotation();
+  }, { threshold: .35 });
+
+  journeyObserver.observe(journey);
+  document.addEventListener('visibilitychange', startCheckpointRotation);
 }
 
 const valueCarousel = document.querySelector('[data-value-carousel]');
