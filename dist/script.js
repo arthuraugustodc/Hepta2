@@ -35,7 +35,6 @@ if (journey) {
   let checkpointTimer;
   let currentStepIndex = Math.max(0, steps.findIndex((step) => step.classList.contains('is-active')));
   let isJourneyInView = false;
-  let isJourneyPaused = false;
 
   const selectStep = (selectedStep) => {
     currentStepIndex = steps.indexOf(selectedStep);
@@ -62,7 +61,7 @@ if (journey) {
 
   const startCheckpointRotation = () => {
     stopCheckpointRotation();
-    if (!isJourneyInView || isJourneyPaused || document.hidden || steps.length < 2) return;
+    if (!isJourneyInView || document.hidden || steps.length < 2) return;
 
     checkpointTimer = window.setInterval(() => {
       currentStepIndex = (currentStepIndex + 1) % steps.length;
@@ -93,34 +92,11 @@ if (journey) {
     });
   });
 
-  journey.addEventListener('mouseenter', () => {
-    isJourneyPaused = true;
-    stopCheckpointRotation();
-  });
-
-  journey.addEventListener('mouseleave', () => {
-    isJourneyPaused = false;
-    startCheckpointRotation();
-  });
-
-  journey.addEventListener('focusin', () => {
-    isJourneyPaused = true;
-    stopCheckpointRotation();
-  });
-
-  journey.addEventListener('focusout', () => {
-    window.setTimeout(() => {
-      if (journey.contains(document.activeElement)) return;
-      isJourneyPaused = false;
-      startCheckpointRotation();
-    }, 0);
-  });
-
   const journeyObserver = new IntersectionObserver((entries) => {
     isJourneyInView = entries[0].isIntersecting;
     if (isJourneyInView) startCheckpointRotation();
     else stopCheckpointRotation();
-  }, { threshold: .35 });
+  }, { threshold: .15 });
 
   journeyObserver.observe(journey);
   document.addEventListener('visibilitychange', startCheckpointRotation);
