@@ -644,7 +644,7 @@ body.sector-dialog-open { overflow: hidden; }
 }
 .footer-brand .brand { width: auto; max-width: 100%; justify-content: flex-start; }
 .footer-logo { width: 340px; max-width: 100%; height: 118px; object-fit: cover; object-position: center; }
-.footer-brand .brand-tag { margin-top: -.45rem; color: rgba(255,255,255,.58); font-size: .6rem; letter-spacing: .3em; }
+.footer-brand .brand-tag { margin-top: .15rem; color: rgba(255,255,255,.72); font-size: .72rem; font-weight: 600; line-height: 1.4; letter-spacing: .18em; }
 .footer-brand::after { display: none; }
 .footer-main > :not(.footer-brand) {
   min-height: 176px;
@@ -658,21 +658,21 @@ body.sector-dialog-open { overflow: hidden; }
 .footer-links a { color: var(--muted); text-decoration: none; }
 .footer-links a:hover { color: var(--paper); }
 .footer-contact { display: grid; gap: 1.25rem; }
-.footer-socials { display: flex; align-items: center; gap: .9rem; }
+.footer-socials { display: flex; align-items: center; gap: .75rem; }
 .social-link {
   display: grid;
   place-items: center;
-  width: 72px;
-  height: 72px;
+  width: 54px;
+  height: 54px;
   border: 1px solid rgba(219, 27, 39, .46);
-  border-radius: 18px;
+  border-radius: 14px;
   color: #df1621;
   background: linear-gradient(145deg, rgba(162, 12, 23, .16), rgba(255,255,255,.018));
   box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 12px 30px rgba(0,0,0,.2);
   text-decoration: none;
   transition: color .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
-.social-link svg { width: 40px; height: 40px; }
+.social-link svg { width: 29px; height: 29px; }
 .social-link:hover {
   color: #ff2a36;
   border-color: rgba(219, 27, 39, .85);
@@ -907,7 +907,7 @@ body.sector-dialog-open { overflow: hidden; }
   .footer-brand, .footer-main > :last-child { grid-column: auto; }
   .footer-brand { min-height: auto; padding: 1.5rem; }
   .footer-brand .footer-logo { width: 300px; max-width: 100%; height: 104px; }
-  .footer-brand .brand-tag { display: block; margin-top: -.4rem; font-size: .56rem; letter-spacing: .22em; }
+  .footer-brand .brand-tag { display: block; margin-top: .1rem; font-size: .64rem; letter-spacing: .16em; }
   .footer-main > :not(.footer-brand) { min-height: auto; }
   .footer-bottom { flex-direction: column; }
   .page-orbit { right: -80px; top: calc(var(--header) + 1rem); width: 180px; }
