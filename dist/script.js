@@ -386,6 +386,7 @@ if (sectorDialog) {
   };
 
   const cards = document.querySelectorAll('.preview-card[data-sector]');
+  const sheet = sectorDialog.querySelector('.sector-sheet');
   const closeButton = sectorDialog.querySelector('[data-sector-dialog-close]');
   const indexElement = sectorDialog.querySelector('[data-sector-dialog-index]');
   const iconUse = sectorDialog.querySelector('[data-sector-dialog-icon]');
@@ -395,12 +396,31 @@ if (sectorDialog) {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let lastTrigger;
   let closeTimer;
+  let openFrame;
 
   const closeSectorDialog = () => {
     if (!sectorDialog.open || sectorDialog.classList.contains('is-closing')) return;
+    window.cancelAnimationFrame(openFrame);
+    sectorDialog.classList.remove('is-preparing');
     sectorDialog.classList.add('is-closing');
     window.clearTimeout(closeTimer);
-    closeTimer = window.setTimeout(() => sectorDialog.close(), reducedMotion.matches ? 0 : 230);
+    closeTimer = window.setTimeout(() => sectorDialog.close(), reducedMotion.matches ? 0 : 350);
+  };
+
+  const setDialogOrigin = (card) => {
+    const cardRect = card.getBoundingClientRect();
+    const sheetRect = sheet.getBoundingClientRect();
+    const originX = cardRect.left + cardRect.width / 2;
+    const originY = cardRect.top + cardRect.height / 2;
+    const targetX = sheetRect.left + sheetRect.width / 2;
+    const targetY = sheetRect.top + sheetRect.height / 2;
+    const scaleX = Math.max(.12, Math.min(1, cardRect.width / sheetRect.width));
+    const scaleY = Math.max(.12, Math.min(1, cardRect.height / sheetRect.height));
+
+    sectorDialog.style.setProperty('--sector-origin-x', `${originX - targetX}px`);
+    sectorDialog.style.setProperty('--sector-origin-y', `${originY - targetY}px`);
+    sectorDialog.style.setProperty('--sector-origin-scale-x', scaleX.toFixed(3));
+    sectorDialog.style.setProperty('--sector-origin-scale-y', scaleY.toFixed(3));
   };
 
   const openSectorDialog = (card) => {
@@ -419,9 +439,15 @@ if (sectorDialog) {
     }));
 
     sectorDialog.classList.remove('is-closing');
+    sectorDialog.classList.add('is-preparing');
     document.body.classList.add('sector-dialog-open');
     sectorDialog.showModal();
-    closeButton.focus();
+    openFrame = window.requestAnimationFrame(() => {
+      setDialogOrigin(card);
+      void sheet.offsetWidth;
+      sectorDialog.classList.remove('is-preparing');
+      closeButton.focus();
+    });
   };
 
   cards.forEach((card) => card.addEventListener('click', () => openSectorDialog(card)));
@@ -438,8 +464,13 @@ if (sectorDialog) {
 
   sectorDialog.addEventListener('close', () => {
     window.clearTimeout(closeTimer);
-    sectorDialog.classList.remove('is-closing');
+    window.cancelAnimationFrame(openFrame);
+    sectorDialog.classList.remove('is-closing', 'is-preparing');
     document.body.classList.remove('sector-dialog-open');
+    sectorDialog.style.removeProperty('--sector-origin-x');
+    sectorDialog.style.removeProperty('--sector-origin-y');
+    sectorDialog.style.removeProperty('--sector-origin-scale-x');
+    sectorDialog.style.removeProperty('--sector-origin-scale-y');
     lastTrigger?.focus();
   });
 }
