@@ -708,13 +708,6 @@ body.sector-dialog-open { overflow: hidden; }
     scroll-snap-stop: always;
   }
   body.home-page .hero { scroll-snap-align: start; scroll-snap-stop: always; }
-  body.home-page .final-cta {
-    min-height: calc(100svh - var(--header));
-    display: grid;
-    align-items: center;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
   body.home-page .site-footer { scroll-snap-align: end; }
 }
 
