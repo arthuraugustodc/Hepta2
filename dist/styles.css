@@ -143,7 +143,7 @@ p { margin: 0; }
 }
 .hero-animation-frame {
   position: absolute;
-  z-index: -3;
+  z-index: 0;
   left: 50%;
   top: 0;
   width: auto;
@@ -157,7 +157,7 @@ p { margin: 0; }
 .hero::after {
   content: '';
   position: absolute;
-  z-index: -1;
+  z-index: 1;
   inset: 0;
   pointer-events: none;
   background:
@@ -165,12 +165,12 @@ p { margin: 0; }
     linear-gradient(180deg, rgba(7,7,7,.18), rgba(7,7,7,.28));
 }
 .hero::before {
-  content: ''; position: absolute; z-index: 0; width: min(70vw, 760px); aspect-ratio: 1; right: -18%; top: 4%; border-radius: 50%;
+  content: ''; position: absolute; z-index: 1; width: min(70vw, 760px); aspect-ratio: 1; right: -18%; top: 4%; border-radius: 50%;
   background: repeating-radial-gradient(circle, transparent 0 48px, rgba(187,150,62,.085) 49px 50px);
   mask-image: radial-gradient(circle, #000 20%, transparent 68%);
   animation: field-drift 18s linear infinite;
 }
-.hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); align-items: center; gap: clamp(2.75rem, 6vw, 5.25rem); }
+.hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); align-items: center; gap: clamp(2.75rem, 6vw, 5.25rem); }
 .hero-copy { position: relative; z-index: 1; }
 .hero h1 { max-width: 17ch; font-size: clamp(2.8rem, 4.35vw, 4.35rem); }
 .hero .lede { max-width: 48ch; margin-top: 1rem; font-size: clamp(1.2rem, 1.65vw, 1.5rem); line-height: 1.42; }
