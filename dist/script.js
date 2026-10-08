@@ -474,3 +474,19 @@ if (sectorDialog) {
     lastTrigger?.focus();
   });
 }
+
+const heroAnimationFrame = document.querySelector('[data-hero-animation]');
+
+if (heroAnimationFrame) {
+  const prepareHeroAnimation = () => {
+    const animationDocument = heroAnimationFrame.contentDocument;
+    if (!animationDocument) return;
+
+    animationDocument.querySelector('button')?.remove();
+    animationDocument.documentElement.style.overflow = 'hidden';
+    animationDocument.body.style.overflow = 'hidden';
+  };
+
+  heroAnimationFrame.addEventListener('load', prepareHeroAnimation);
+  if (heroAnimationFrame.contentDocument?.readyState === 'complete') prepareHeroAnimation();
+}
